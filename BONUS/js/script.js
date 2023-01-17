@@ -264,24 +264,6 @@ let forward = setInterval(next, 3000);
 let running = true;
 let intervalDirection = "forward";
 
-invert.addEventListener('click', function(){
-  clearInterval(forward);
-  clearInterval(backwards);
-
-  if (intervalDirection == "forward") {
-    clearInterval(forward);
-    backwards = setInterval(prev, 3000);
-    intervalDirection = 'backward';
-    invert.innerText = "Invert Autoplay (on)"
-  } else {
-    clearInterval(backwards);
-    forward = setInterval(next, 3000);
-    invert.innerText = "Invert Autoplay (off)"
-    intervalDirection = 'forward';
-  }
-  
-});
-
 toggle.addEventListener('click', function() {
   clearInterval(forward);
   clearInterval(backwards);
@@ -304,3 +286,26 @@ toggle.addEventListener('click', function() {
   }
 });
 
+invert.addEventListener('click', function(){
+    if(running){
+      if (intervalDirection == "forward") {
+        clearInterval(forward);
+        backwards = setInterval(prev, 3000);
+        intervalDirection = 'backward';
+        invert.innerText = "Invert Autoplay (on)"
+      } else {
+        clearInterval(backwards);
+        forward = setInterval(next, 3000);
+        invert.innerText = "Invert Autoplay (off)"
+        intervalDirection = 'forward';
+      }
+    }else{
+      if (intervalDirection == "forward") {
+        intervalDirection = 'backward';
+        invert.innerText = "Invert Autoplay (on)";
+      } else {
+        intervalDirection = 'forward';
+        invert.innerText = "Invert Autoplay (off)";
+      }
+    }
+  });
