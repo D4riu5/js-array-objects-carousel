@@ -261,4 +261,4 @@ AvengersElement.addEventListener(`click`,
 
 
 // Timer stuff
-
+setInterval(next, 3000);
