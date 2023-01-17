@@ -44,13 +44,13 @@ for (let image of images){
   carouselDiv.innerHTML += `
   <div class="slide">
     <img src="${image.image}">
-    <div id="text-container" class="w-100">
+    <div id="text-container" class="w-100 ps-2">
       <h4>${image.title}</h4>
       <p class="w-75">${image.text}</p>
     </div>  
   </div>
     `;
-    
+
   thumbnailsContainer.innerHTML += `<div class="thumbnail_slide"><img class="img2" src="${image.image}"></div>`;
 }
 
