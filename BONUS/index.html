@@ -15,7 +15,7 @@
 
     <body class="bg-dark text-white">
 
-        <main class="d-flex justify-content-center align-items-center">
+        <main class="m-5 d-flex flex-column justify-content-center align-items-center">
             <div class="my_wrapper">
                 <div class="carousel"> 
     
@@ -34,6 +34,11 @@
                 <div id="downy" onclick="next()" class="down next"><i class="bi bi-chevron-compact-down"></i></div>
                 
                 <button onclick="see()" class="close-thumbnails"> x </button>
+            </div>
+
+            <div class="m-5">
+                <button id="toggle"  class="rounded p-1 px-3 m-1">Stop Autoplay</button>
+                <button id="invert" class="rounded p-1 px-3 m-1">Invert Autoplay (off)</button>
             </div>
         </main>
 

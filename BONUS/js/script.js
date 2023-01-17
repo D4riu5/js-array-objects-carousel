@@ -35,6 +35,8 @@ const rightArrow = document.getElementById(`righty`);
 const upArrow = document.getElementById(`uppy`);
 const downArrow = document.getElementById(`downy`);
 
+const toggle = document.getElementById(`toggle`);
+const invert = document.getElementById(`invert`);
 
 // counters 
 let selected = 0;
@@ -54,12 +56,9 @@ for (let image of images){
   thumbnailsContainer.innerHTML += `<div class="thumbnail_slide"><img class="img2" src="${image.image}"></div>`;
 }
 
-
+// selectors for newly added classes in the previous cycle, cant move it above with the other selectors
 const allSlides = document.querySelectorAll('.slide');
 const allThumbnails = document.querySelectorAll('.thumbnail_slide');
-
-console.log("All slides: " + allSlides);
-console.log("All thumbnail slides: " +allThumbnails);
 
 // added selected class to position 0
 allSlides[selected].classList.add('selected');
@@ -191,7 +190,6 @@ FortniteElement.addEventListener(`click`,
                 selected = 2;
                 allSlides[selected].classList.add('selected');
                 allThumbnails[selected].classList.add('selected-thumbnail');
-                console.log("x is " + x + " selected is " + selected + " STOP")
                 break;
             } else {
                 allSlides[selected].classList.remove('selected');
@@ -261,4 +259,48 @@ AvengersElement.addEventListener(`click`,
 
 
 // Timer stuff
-setInterval(next, 3000);
+let backwards
+let forward = setInterval(next, 3000);
+let running = true;
+let intervalDirection = "forward";
+
+invert.addEventListener('click', function(){
+  clearInterval(forward);
+  clearInterval(backwards);
+
+  if (intervalDirection == "forward") {
+    clearInterval(forward);
+    backwards = setInterval(prev, 3000);
+    intervalDirection = 'backward';
+    invert.innerText = "Invert Autoplay (on)"
+  } else {
+    clearInterval(backwards);
+    forward = setInterval(next, 3000);
+    invert.innerText = "Invert Autoplay (off)"
+    intervalDirection = 'forward';
+  }
+  
+});
+
+toggle.addEventListener('click', function() {
+  clearInterval(forward);
+  clearInterval(backwards);
+  if (running){
+    toggle.innerText = "Start Autoplay"
+    running = false;
+    clearInterval(forward);
+    clearInterval(backwards);
+  } else if (!running) {
+    toggle.innerHTML = 'Stop Autoplay';
+
+    if (intervalDirection == "forward") {
+      clearInterval(backwards);
+      forward = setInterval(next, 3000);
+    } else{
+      clearInterval(forward);
+      backwards = setInterval(prev, 3000);
+    }
+    running = true;
+  }
+});
+
